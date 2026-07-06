@@ -1,10 +1,13 @@
 import React from 'react';
 import { Card } from 'flowbite-react';
-import { HiHeart, HiOutlineHeart, HiTrash, HiPencilAlt } from 'react-icons/hi'; 
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'; 
+import { HiTrash, HiPencilAlt } from 'react-icons/hi'; 
+
 export default function BookCard({ book, onDelete, onEdit, onToggleFavorite }) {
   return (
     <Card className="w-full max-w-sm h-115 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
       
+
       <div className="h-44 w-full overflow-hidden bg-gray-100">
         <img 
           src={book.coverImage || "https://picsum.photos/200/300"} 
@@ -12,7 +15,6 @@ export default function BookCard({ book, onDelete, onEdit, onToggleFavorite }) {
           className="h-full w-full object-cover"
         />
       </div>
-      
       <div className="p-4 flex flex-col grow justify-between">
         
         <div className="grow">
@@ -22,6 +24,7 @@ export default function BookCard({ book, onDelete, onEdit, onToggleFavorite }) {
           <p className="text-sm font-medium text-pink-600 mb-2 line-clamp-1">
             By: {book.author}
           </p>
+  
           <p className="font-normal text-gray-600 dark:text-gray-400 text-sm line-clamp-3">
             {book.description || "No description available for this book."}
           </p>
@@ -31,12 +34,12 @@ export default function BookCard({ book, onDelete, onEdit, onToggleFavorite }) {
           
           <button 
             onClick={() => onToggleFavorite(book)} 
-            className="text-2xl focus:outline-none transition-transform duration-200 hover:scale-110"
+            className="text-3xl focus:outline-none transition-transform duration-200 hover:scale-110 flex items-center"
           >
             {book.isFavorite ? (
-              <HiHeart className="text-red-500" />
+              <AiFillHeart className="text-red-500 filter drop-shadow-md" />
             ) : (
-              <HiOutlineHeart className="text-gray-400 hover:text-red-500" />
+              <AiOutlineHeart className="text-gray-400 hover:text-red-500" />
             )}
           </button>
 
