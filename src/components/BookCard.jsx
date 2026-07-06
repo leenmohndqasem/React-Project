@@ -5,14 +5,14 @@ import { HiTrash, HiPencil } from 'react-icons/hi';
 
 export default function BookCard({ book, onDelete, onEdit, onToggleFavorite }) {
   return (
-    <Card className="w-full max-w-sm h-[480px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+    <Card className="w-full max-w-sm h-120 overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
       <img 
         src={book.coverImage || "https://picsum.photos/200/300"} 
         alt={book.title} 
         className="h-44 w-full object-cover"
       />
       
-      <div className="p-2 flex flex-col flex-grow justify-between">
+      <div className="p-2 flex flex-col grow justify-between">
         
         <div>
           <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white mb-1 line-clamp-1">
