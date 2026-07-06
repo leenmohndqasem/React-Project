@@ -28,8 +28,10 @@ export default function App() {
   const handleSaveBook = async (bookData) => {
     try {
       if (selectedBook) {
+
         await updateBook(selectedBook.id, bookData);
       } else {
+
         await createBook(bookData);
       }
       setIsModalOpen(false);
@@ -126,7 +128,6 @@ export default function App() {
         </div>
       </header>
 
-      {/* عرض الكتب */}
       <main className="container mx-auto px-4">
         {filteredBooks.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
@@ -166,11 +167,8 @@ export default function App() {
         </div>
       </footer>
 
-      {/* المودال المطور والمنسق بالكامل بـ Tailwind */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          
-          {/* الخلفية المعتمة مع تأثير الضباب (Blur) */}
           <div 
             className="fixed inset-0 bg-gray-950/40 backdrop-blur-xs transition-opacity duration-300"
             onClick={() => {
@@ -179,10 +177,8 @@ export default function App() {
             }}
           ></div>
 
-          {/* هيكل المودال المنسق بدقة */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-md w-full shadow-2xl relative z-10 border border-gray-100 dark:border-gray-700 transform transition-all overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-            
-            {/* رأس المودال */}
+          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-md w-full shadow-2xl relative z-10 border border-gray-100 dark:border-gray-700 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
               <h3 className="text-xl font-bold text-gray-950 dark:text-white flex items-center gap-2">
                 {selectedBook ? '📝 Edit Book Details' : '✨ Add New Book'}
@@ -192,13 +188,11 @@ export default function App() {
                   setIsModalOpen(false);
                   setSelectedBook(null);
                 }}
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none cursor-pointer"
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none cursor-pointer font-bold"
               >
                 ✕
               </button>
             </div>
-            
-            {/* محتوى المودال وبداخله الفورم */}
             <div className="p-6 bg-white dark:bg-gray-800">
               <BookForm
                 initialBook={selectedBook} 
