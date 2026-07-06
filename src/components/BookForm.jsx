@@ -8,31 +8,35 @@ export default function BookForm({ onSubmit, initialBook, onClose }) {
   const [coverImage, setCoverImage] = useState('');
 
   useEffect(() => {
-    setTitle('');
-    setAuthor('');
-    setDescription('');
-    setCoverImage('');
+    if (initialBook) {
+      setTitle(initialBook.title || '');
+      setAuthor(initialBook.author || '');
+      setDescription(initialBook.description || '');
+      setCoverImage(initialBook.coverImage || '');
+    } else {
+      setTitle('');
+      setAuthor('');
+      setDescription('');
+      setCoverImage('');
+    }
   }, [initialBook]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
     const updatedBook = {
-
       ...(initialBook && { id: initialBook.id, isFavorite: initialBook.isFavorite }), 
-      title: title.trim() ? title.trim() : (initialBook ? initialBook.title : ''),
-      author: author.trim() ? author.trim() : (initialBook ? initialBook.author : ''),
-      description: description.trim() ? description.trim() : (initialBook ? initialBook.description : ''),
-      coverImage: coverImage.trim() ? coverImage.trim() : (initialBook ? initialBook.coverImage : ''),
+      title: title.trim(),
+      author: author.trim(),
+      description: description.trim(),
+      coverImage: coverImage.trim(),
     };
-    
     onSubmit(updatedBook);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-2">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div>
-        <div className="mb-2 block">
+        <div className="mb-2 block text-left">
           <Label htmlFor="title" value="Book Title" />
         </div>
         <TextInput
@@ -40,13 +44,13 @@ export default function BookForm({ onSubmit, initialBook, onClose }) {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder={initialBook ? initialBook.title : "Enter book title"}
-          required={!initialBook} 
+          placeholder="Enter book title"
+          required
         />
       </div>
 
       <div>
-        <div className="mb-2 block">
+        <div className="mb-2 block text-left">
           <Label htmlFor="author" value="Author" />
         </div>
         <TextInput
@@ -54,13 +58,13 @@ export default function BookForm({ onSubmit, initialBook, onClose }) {
           type="text"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
-          placeholder={initialBook ? initialBook.author : "Enter author name"}
-          required={!initialBook}
+          placeholder="Enter author name"
+          required
         />
       </div>
 
       <div>
-        <div className="mb-2 block">
+        <div className="mb-2 block text-left">
           <Label htmlFor="description" value="Description" />
         </div>
         <Textarea
@@ -68,12 +72,12 @@ export default function BookForm({ onSubmit, initialBook, onClose }) {
           rows={3}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder={initialBook ? initialBook.description : "Enter book description..."}
+          placeholder="Enter book description..."
         />
       </div>
 
       <div>
-        <div className="mb-2 block">
+        <div className="mb-2 block text-left">
           <Label htmlFor="coverImage" value="Cover Image URL" />
         </div>
         <TextInput
@@ -81,11 +85,11 @@ export default function BookForm({ onSubmit, initialBook, onClose }) {
           type="url"
           value={coverImage}
           onChange={(e) => setCoverImage(e.target.value)}
-          placeholder={initialBook ? initialBook.coverImage : "https://example.com/image.jpg"}
+          placeholder="https://example.com/image.jpg"
         />
       </div>
 
-      <div className="flex justify-end gap-2 mt-4">
+      <div className="flex justify-end gap-2 mt-4 border-t pt-4 border-gray-100 dark:border-gray-700">
         <Button color="gray" onClick={onClose}>
           Cancel
         </Button>

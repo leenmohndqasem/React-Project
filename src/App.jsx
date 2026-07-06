@@ -9,7 +9,6 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
-  
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
   useEffect(() => {
@@ -88,7 +87,6 @@ export default function App() {
       <header className="bg-white dark:bg-gray-800 shadow-xs p-8 mb-8 border-b border-gray-100 dark:border-gray-700">
         <div className="container mx-auto flex flex-col items-center text-center gap-6">
           
-          {/* تم تعديل التدريج اللوني هنا ليصبح وردي فاتح وناعم */}
           <h1 className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-linear-to-r from-pink-500 via-pink-400 to-rose-400 tracking-tight drop-shadow-xs">
             My Book Archive 
           </h1>
@@ -114,7 +112,6 @@ export default function App() {
                 {showFavoritesOnly ? "Show All" : "Favorites"}
               </button>
               
-              {/* تم تعديل خلفية زر إضافة كتاب لتصبح وردية */}
               <button 
                 onClick={handleAddClick} 
                 className="h-11 flex items-center justify-center gap-2 rounded-full bg-pink-500 px-6 text-sm font-semibold text-white shadow-xs hover:bg-pink-600 transition-all duration-200 cursor-pointer whitespace-nowrap w-full sm:w-auto"
@@ -164,17 +161,58 @@ export default function App() {
             ©️ {new Date().getFullYear()} Book Archive. All Rights Reserved.
           </p>
           <p className="text-gray-400 dark:text-gray-500 text-xs mt-1">
-            Designed & Developed  by <span className="text-pink-500 dark:text-pink-400 font-semibold">Leen Kasem</span>
+            Designed & Developed by <span className="text-pink-500 dark:text-pink-400 font-semibold">Leen Kasem</span>
           </p>
         </div>
       </footer>
 
-      <BookForm
-        show={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSave={handleSaveBook}
-        currentBook={selectedBook}
-      />
+      {/* المودال المطور والمنسق بالكامل بـ Tailwind */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          
+          {/* الخلفية المعتمة مع تأثير الضباب (Blur) */}
+          <div 
+            className="fixed inset-0 bg-gray-950/40 backdrop-blur-xs transition-opacity duration-300"
+            onClick={() => {
+              setIsModalOpen(false);
+              setSelectedBook(null);
+            }}
+          ></div>
+
+          {/* هيكل المودال المنسق بدقة */}
+          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-md w-full shadow-2xl relative z-10 border border-gray-100 dark:border-gray-700 transform transition-all overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            
+            {/* رأس المودال */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+              <h3 className="text-xl font-bold text-gray-950 dark:text-white flex items-center gap-2">
+                {selectedBook ? '📝 Edit Book Details' : '✨ Add New Book'}
+              </h3>
+              <button 
+                onClick={() => {
+                  setIsModalOpen(false);
+                  setSelectedBook(null);
+                }}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+            
+            {/* محتوى المودال وبداخله الفورم */}
+            <div className="p-6 bg-white dark:bg-gray-800">
+              <BookForm
+                initialBook={selectedBook} 
+                onSubmit={handleSaveBook}
+                onClose={() => {
+                  setIsModalOpen(false);
+                  setSelectedBook(null);
+                }}
+              />
+            </div>
+
+          </div>
+        </div>
+      )}
     </div>
   );
 }
