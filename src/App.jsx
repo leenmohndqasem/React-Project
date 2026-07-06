@@ -28,10 +28,8 @@ export default function App() {
   const handleSaveBook = async (bookData) => {
     try {
       if (selectedBook) {
-
         await updateBook(selectedBook.id, bookData);
       } else {
-
         await createBook(bookData);
       }
       setIsModalOpen(false);
@@ -88,14 +86,16 @@ export default function App() {
       
       <header className="bg-white dark:bg-gray-800 shadow-xs p-8 mb-8 border-b border-gray-100 dark:border-gray-700">
         <div className="container mx-auto flex flex-col items-center text-center gap-6">
-          
-          <h1 className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-linear-to-r from-pink-500 via-pink-400 to-rose-400 tracking-tight drop-shadow-xs">
+
+          <h1 
+            style={{ fontFamily: "'Tangerine', cursive" }}
+            className="text-7xl sm:text-7xl font-black text-transparent bg-clip-text bg-linear-to-r from-pink-500 via-pink-400 to-rose-400 tracking-wide drop-shadow-xs py-2"
+          >
             My Book Archive 
           </h1>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-3xl">
             
-            {/* شريط البحث */}
             <div className="w-full relative shadow-xs rounded-xl">
               <SearchBar value={searchTerm} onChange={setSearchTerm} />
             </div>
@@ -181,7 +181,7 @@ export default function App() {
 
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
               <h3 className="text-xl font-bold text-gray-950 dark:text-white flex items-center gap-2">
-                {selectedBook ? '📝 Edit Book Details' : '✨ Add New Book'}
+                {selectedBook ? ' Edit Book' : ' Add Book'}
               </h3>
               <button 
                 onClick={() => {
