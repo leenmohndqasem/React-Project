@@ -44,10 +44,14 @@ export default function App() {
   const handleDeleteBook = async (id) => {
     if (window.confirm("Are you sure you want to delete this book?")) {
       try {
+
         await deleteBook(id);
-        setBooks(books.filter(book => book.id !== id));
+
+        await fetchBooks(); 
+        
       } catch (error) {
         console.error("Error deleting book:", error);
+        alert("Could not delete the book from server.");
       }
     }
   };
